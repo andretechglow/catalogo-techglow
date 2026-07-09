@@ -12,9 +12,11 @@
     --cream: #FAF8F4;
     --gold: #B8975A;
     --gold-deep: #8B6F3F;
+    --gold-light: #F1E7D3;
     --line: #E3DDD1;
     --card: #FFFFFF;
     --muted: #6B6459;
+    --whatsapp: #25D366;
   }
   * { box-sizing: border-box; }
   body {
@@ -104,25 +106,60 @@
     position: relative;
   }
   .thumb svg { width: 34px; height: 34px; stroke: var(--gold); }
+  .thumb img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    padding: 12px;
+    background: var(--cream);
+  }
   .badge {
     position: absolute; top: 10px; right: 10px;
     font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase;
     background: var(--gold); color: var(--ink);
     padding: 4px 8px; border-radius: 999px;
   }
-  .card-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+
+  .card-body { padding: 18px; display: flex; flex-direction: column; flex: 1; }
   .brand { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 4px; }
-  .name { font-size: 20px; margin: 0; line-height: 1.15; }
-  .desc { font-size: 12px; color: var(--muted); margin: 6px 0 0; flex: 1; }
-  .row { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; }
-  .price { font-family: 'Cormorant Garamond', serif; font-size: 18px; }
-  .cta {
-    display: flex; align-items: center; gap: 6px;
-    background: var(--ink); color: var(--cream);
-    font-size: 11px; padding: 8px 14px; border-radius: 999px;
-    text-decoration: none; white-space: nowrap;
+  .name { font-size: 22px; margin: 0 0 12px; line-height: 1.15; }
+
+  .price-row {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 4px;
   }
-  .cta svg { width: 12px; height: 12px; stroke: var(--cream); }
+  .price-row span.unit { font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--muted); margin-left: 4px; }
+
+  .divider { border: none; border-top: 1px solid var(--line); margin: 12px 0; }
+
+  .stock-label {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .stock-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--line);
+    background: var(--gold-light);
+    color: var(--gold-deep);
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    width: fit-content;
+    margin-bottom: 16px;
+  }
+  .stock-pill strong { color: var(--ink); font-weight: 600; }
+
+  .cta {
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+    background: var(--gold); color: var(--ink);
+    font-size: 13px; font-weight: 600; padding: 11px 14px; border-radius: 8px;
+    text-decoration: none; white-space: nowrap; border: none; cursor: pointer;
+    margin-top: auto;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .cta svg { width: 14px; height: 14px; stroke: var(--ink); }
+  .cta:hover { background: var(--gold-deep); }
 
   footer {
     text-align: center; padding: 32px 24px;
@@ -130,6 +167,80 @@
     font-size: 12px; color: #8A8377;
   }
   .empty { text-align: center; padding: 60px 0; font-size: 14px; color: #8A8377; }
+
+  /* Modal */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(26,22,18,0.55);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 20px;
+    z-index: 100;
+  }
+  .overlay.open { display: flex; }
+  .modal {
+    background: var(--card);
+    border-radius: 14px;
+    max-width: 380px;
+    width: 100%;
+    padding: 28px;
+    position: relative;
+  }
+  .modal-close {
+    position: absolute; top: 18px; right: 18px;
+    background: none; border: none; cursor: pointer;
+    color: var(--muted);
+  }
+  .modal .brand { margin-bottom: 4px; }
+  .modal .name { font-size: 26px; margin-bottom: 20px; }
+
+  .qty-label {
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  .qty-sub { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+
+  .stepper {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .stepper button {
+    width: 42px; height: 42px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--gold-light);
+    color: var(--ink);
+    font-size: 18px;
+    cursor: pointer;
+  }
+  .stepper button:disabled {
+    cursor: not-allowed;
+  }
+  .stepper .qty-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    color: var(--ink);
+  }
+  .qty-note { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+
+  .modal-total {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 20px;
+    display: flex; align-items: baseline; justify-content: space-between;
+  }
+  .modal-total .label { font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+  .modal-total .value { font-size: 24px; color: var(--gold-deep); }
+
+  .whatsapp-btn {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--whatsapp); color: #fff;
+    font-size: 14px; font-weight: 600; padding: 13px 14px; border-radius: 10px;
+    text-decoration: none; border: none; cursor: pointer; width: 100%;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .whatsapp-btn svg { width: 16px; height: 16px; fill: #fff; }
 </style>
 </head>
 <body>
@@ -157,6 +268,36 @@
 
 <footer>TechGlow Imports · techglowimports.com.br · Atendimento via WhatsApp e Instagram</footer>
 
+<!-- Modal -->
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Fechar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="brand" id="modalBrand"></div>
+    <h3 class="name font-display" id="modalName"></h3>
+
+    <div class="qty-label">Quantidade</div>
+    <div class="qty-sub" id="modalQtySub"></div>
+    <div class="stepper">
+      <button id="qtyMinus">−</button>
+      <span class="qty-value font-display" id="qtyValue">1</span>
+      <button id="qtyPlus">+</button>
+    </div>
+    <div class="qty-note" id="qtyNote"></div>
+
+    <div class="modal-total">
+      <span class="label">Total estimado</span>
+      <span class="value font-display" id="modalTotal"></span>
+    </div>
+
+    <a class="whatsapp-btn" id="modalWhatsapp" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.84.5 3.56 1.35 5.04L2 22l5.13-1.32C8.55 21.5 10.24 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.15c-.22.62-1.3 1.18-1.8 1.24-.46.06-1.04.08-1.68-.1a15 15 0 0 1-4.65-2.95 12.7 12.7 0 0 1-2.65-3.6c-.28-.5-.34-1.1-.1-1.6.24-.5.7-.95 1.05-1.05.2-.06.42-.06.6 0 .18.06.32.24.42.42l.7 1.6c.1.22.06.48-.08.66l-.3.36c-.14.16-.16.4-.04.58.5.78 1.2 1.5 2 2 .18.12.42.1.58-.04l.36-.3c.18-.14.44-.18.66-.08l1.6.7c.18.1.36.24.42.42.06.18.06.4 0 .6z"/></svg>
+      Enviar Reserva pelo WhatsApp
+    </a>
+  </div>
+</div>
+
 <script>
 const WHATSAPP_NUMBER = "5544999564157";
 
@@ -177,43 +318,45 @@ const CATEGORIES = [
 ];
 
 const PRODUCTS = [
-  { id: 1, category: "perfumes", brand: "Armaf", name: "Club de Nuit Maleka", desc: "Perfume importado", price: "R$ 249,90" },
-  { id: 2, category: "perfumes", brand: "Armaf", name: "Club de Nuit Intense Man", desc: "Perfume importado", price: "R$ 239,90" },
-  { id: 3, category: "perfumes", brand: "Armaf", name: "Club de Nuit Urban", desc: "Perfume importado", price: "R$ 259,90" },
-  { id: 4, category: "perfumes", brand: "French Avenue", name: "Vulcan Feu", desc: "Perfume importado", price: "R$ 329,90", featured: true },
-  { id: 5, category: "perfumes", brand: "French Avenue", name: "Liquid Brun", desc: "Perfume importado", price: "R$ 319,90" },
-  { id: 6, category: "perfumes", brand: "French Avenue", name: "Spectre Ghost", desc: "Perfume importado", price: "R$ 289,90" },
-  { id: 7, category: "perfumes", brand: "French Avenue", name: "Aether Extrait", desc: "Perfume importado", price: "R$ 319,90" },
-  { id: 8, category: "perfumes", brand: "Afnan", name: "Turathi Blue", desc: "Perfume importado", price: "R$ 279,90" },
-  { id: 9, category: "perfumes", brand: "Afnan", name: "9PM", desc: "Perfume importado", price: "R$ 239,90" },
-  { id: 10, category: "perfumes", brand: "Bidaya", name: "Maktub La Vie", desc: "Perfume importado", price: "R$ 269,90" },
-  { id: 11, category: "perfumes", brand: "Bidaya", name: "Habibi King", desc: "Perfume importado", price: "R$ 279,90" },
-  { id: 12, category: "perfumes", brand: "Bidaya", name: "Habibi Prince", desc: "Perfume importado", price: "R$ 289,90" },
-  { id: 13, category: "perfumes", brand: "Bidaya", name: "Elliur", desc: "Perfume importado", price: "R$ 289,90" },
+  { id: 1, category: "perfumes", brand: "Armaf", name: "Club de Nuit Maleka", price: "R$ 249,90", image: "images/armaf-club-de-nuit-maleka.jpg" },
+  { id: 2, category: "perfumes", brand: "Armaf", name: "Club de Nuit Intense Man", price: "R$ 239,90", image: "images/armaf-club-de-nuit-intense-man.jpg" },
+  { id: 3, category: "perfumes", brand: "Armaf", name: "Club de Nuit Urban", price: "R$ 259,90", image: "images/armaf-club-de-nuit-urban.jpg" },
+  { id: 4, category: "perfumes", brand: "French Avenue", name: "Vulcan Feu", price: "R$ 329,90", featured: true, image: "images/french-avenue-vulcan-feu.jpg" },
+  { id: 5, category: "perfumes", brand: "French Avenue", name: "Liquid Brun", price: "R$ 319,90", image: "images/french-avenue-liquid-brun.jpg" },
+  { id: 6, category: "perfumes", brand: "French Avenue", name: "Spectre Ghost", price: "R$ 289,90", image: "images/french-avenue-spectre-ghost.jpg" },
+  { id: 7, category: "perfumes", brand: "French Avenue", name: "Aether Extrait", price: "R$ 319,90", image: "images/french-avenue-aether-extrait.jpg" },
+  { id: 8, category: "perfumes", brand: "Afnan", name: "Turathi Blue", price: "R$ 279,90", image: "images/afnan-turathi-blue.jpg" },
+  { id: 9, category: "perfumes", brand: "Afnan", name: "9PM", price: "R$ 239,90", image: "images/afnan-9pm.jpg" },
+  { id: 10, category: "perfumes", brand: "Bidaya", name: "Maktub La Vie", price: "R$ 269,90", image: "images/bidaya-maktub-la-vie.jpg" },
+  { id: 11, category: "perfumes", brand: "Bidaya", name: "Habibi King", price: "R$ 279,90", image: "images/bidaya-habibi-king.jpg" },
+  { id: 12, category: "perfumes", brand: "Bidaya", name: "Habibi Prince", price: "R$ 289,90", image: "images/bidaya-habibi-prince.jpg" },
+  { id: 13, category: "perfumes", brand: "Bidaya", name: "Elliur", price: "R$ 289,90", image: "images/bidaya-elliur.jpg" },
 
-  { id: 14, category: "decants", brand: "Armaf", name: "Club de Nuit Maleka", desc: "Decant 5ml", price: "R$ 35,90" },
-  { id: 15, category: "decants", brand: "Armaf", name: "Club de Nuit Intense Man", desc: "Decant 5ml", price: "R$ 35,90" },
-  { id: 16, category: "decants", brand: "Armaf", name: "Club de Nuit Urban", desc: "Decant 5ml", price: "R$ 35,90" },
-  { id: 17, category: "decants", brand: "French Avenue", name: "Vulcan Feu", desc: "Decant 5ml", price: "R$ 39,90" },
-  { id: 18, category: "decants", brand: "French Avenue", name: "Liquid Brun", desc: "Decant 5ml", price: "R$ 39,90" },
-  { id: 19, category: "decants", brand: "French Avenue", name: "Spectre Ghost", desc: "Decant 5ml", price: "R$ 39,90" },
-  { id: 20, category: "decants", brand: "French Avenue", name: "Aether Extrait", desc: "Decant 5ml", price: "R$ 45,90", featured: true },
-  { id: 21, category: "decants", brand: "Afnan", name: "Turathi Blue", desc: "Decant 5ml", price: "R$ 39,90" },
+  { id: 14, category: "decants", brand: "Armaf", name: "Club de Nuit Maleka", price: "R$ 35,90", image: "images/armaf-club-de-nuit-maleka-decant.jpg" },
+  { id: 15, category: "decants", brand: "Armaf", name: "Club de Nuit Intense Man", price: "R$ 35,90", image: "images/armaf-club-de-nuit-intense-man-decant.jpg" },
+  { id: 16, category: "decants", brand: "Armaf", name: "Club de Nuit Urban", price: "R$ 35,90", image: "images/armaf-club-de-nuit-urban-decant.jpg" },
+  { id: 17, category: "decants", brand: "French Avenue", name: "Vulcan Feu", price: "R$ 39,90", image: "images/french-avenue-vulcan-feu-decant.jpg" },
+  { id: 18, category: "decants", brand: "French Avenue", name: "Liquid Brun", price: "R$ 39,90", image: "images/french-avenue-liquid-brun-decant.jpg" },
+  { id: 19, category: "decants", brand: "French Avenue", name: "Spectre Ghost", price: "R$ 39,90", image: "images/french-avenue-spectre-ghost-decant.jpg" },
+  { id: 20, category: "decants", brand: "French Avenue", name: "Aether Extrait", price: "R$ 45,90", featured: true, image: "images/french-avenue-aether-extrait-decant.jpg" },
+  { id: 21, category: "decants", brand: "Afnan", name: "Turathi Blue", price: "R$ 39,90", image: "images/afnan-turathi-blue-decant.jpg" },
 
-  { id: 22, category: "eletronicos", brand: "Apple", name: "iPhone 17 256GB", desc: "Lacrado, importado", price: "R$ 5.600,00" },
-  { id: 23, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro 256GB", desc: "Lacrado, importado", price: "R$ 7.990,00" },
-  { id: 24, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro Max 256GB", desc: "Lacrado, importado", price: "R$ 8.990,00", featured: true },
-  { id: 25, category: "eletronicos", brand: "Apple", name: "iPad 11 A16 128GB", desc: "Lacrado, importado", price: "R$ 2.600,00" },
+  { id: 22, category: "eletronicos", brand: "Apple", name: "iPhone 17 256GB", price: "R$ 5.600,00", image: "images/apple-iphone-17.jpg" },
+  { id: 23, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro 256GB", price: "R$ 7.990,00", image: "images/apple-iphone-17-pro.jpg" },
+  { id: 24, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro Max 256GB", price: "R$ 8.990,00", featured: true, image: "images/apple-iphone-17-pro-max.jpg" },
+  { id: 25, category: "eletronicos", brand: "Apple", name: "iPad 11 A16 128GB", price: "R$ 2.600,00", image: "images/apple-ipad-11.jpg" },
 
-  { id: 26, category: "bebidas", brand: "Catena Zapata", name: "Vinho D.V Catena Cabernet Malbec", desc: "Vinho importado", price: "R$ 140,00" },
-  { id: 27, category: "bebidas", brand: "Catena Zapata", name: "Vinho Angelica Zapata Malbec", desc: "Vinho importado", price: "R$ 120,00" },
-  { id: 28, category: "bebidas", brand: "Ernesto Catena", name: "Vinho Alma Negra", desc: "Vinho importado", price: "R$ 180,00" },
-  { id: 29, category: "bebidas", brand: "Whisky", name: "The Dalmore", desc: "Whisky importado", price: "R$ 690,00" },
-  { id: 30, category: "bebidas", brand: "Whisky", name: "The Macallan", desc: "Whisky importado", price: "R$ 790,00" }
+  { id: 26, category: "bebidas", brand: "Catena Zapata", name: "Vinho D.V Catena Cabernet Malbec", price: "R$ 140,00", image: "images/catena-zapata-dv-catena.jpg" },
+  { id: 27, category: "bebidas", brand: "Catena Zapata", name: "Vinho Angelica Zapata Malbec", price: "R$ 120,00", image: "images/catena-zapata-angelica-zapata.jpg" },
+  { id: 28, category: "bebidas", brand: "Ernesto Catena", name: "Vinho Alma Negra", price: "R$ 180,00", image: "images/ernesto-catena-alma-negra.jpg" },
+  { id: 29, category: "bebidas", brand: "Whisky", name: "The Dalmore", price: "R$ 690,00", image: "images/whisky-the-dalmore.jpg" },
+  { id: 30, category: "bebidas", brand: "Whisky", name: "The Macallan", price: "R$ 790,00", image: "images/whisky-the-macallan.jpg" }
 ];
 
 let active = "todos";
 let query = "";
+let currentProduct = null;
+let qty = 1;
 
 const tabsEl = document.getElementById("tabs");
 const gridEl = document.getElementById("grid");
@@ -221,6 +364,15 @@ const emptyEl = document.getElementById("empty");
 
 function icon(cat) {
   return `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[cat] || ICONS.todos}</svg>`;
+}
+
+function parsePrice(str) {
+  const clean = str.replace(/[R$\s]/g, "").replace(/\./g, "").replace(",", ".");
+  return parseFloat(clean);
+}
+
+function formatPrice(num) {
+  return num.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
 function renderTabs() {
@@ -255,29 +407,116 @@ function renderGrid() {
   emptyEl.style.display = "none";
 
   gridEl.innerHTML = filtered.map(p => {
-    const msg = encodeURIComponent(`Olá! Quero reservar: ${p.name} (${p.brand}) - ${p.price}`);
+    const isDecant = p.category === "decants";
+    const isEletronico = p.category === "eletronicos";
+    const stockPill = isDecant
+      ? `<div class="stock-label">Estoque disponível</div><div class="stock-pill">Decant <strong>5ml</strong></div>`
+      : isEletronico
+      ? `<div class="stock-label">Estoque disponível</div><div class="stock-pill"><strong>Conferir disponibilidade e cores</strong></div>`
+      : `<div class="stock-label">Estoque disponível</div><div class="stock-pill">Disponível: <strong>${p.stock ?? 3}</strong></div>`;
     return `
       <div class="card">
         <div class="thumb">
-          ${icon(p.category)}
+          ${p.image ? `<img src="${p.image}" alt="${p.name}" />` : icon(p.category)}
           ${p.featured ? '<span class="badge">Destaque</span>' : ''}
         </div>
         <div class="card-body">
           ${p.brand ? `<span class="brand">${p.brand}</span>` : ''}
           <h3 class="name font-display">${p.name}</h3>
-          <p class="desc">${p.desc}</p>
-          <div class="row">
-            <span class="price font-display">${p.price}</span>
-            <a class="cta" target="_blank" rel="noopener noreferrer" href="https://wa.me/${WHATSAPP_NUMBER}?text=${msg}">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              Quero Reservar!
-            </a>
-          </div>
+          <div class="price-row">${p.price}${isDecant ? '<span class="unit">/5ml</span>' : ''}</div>
+          <hr class="divider" />
+          ${stockPill}
+          <button class="cta" data-id="${p.id}">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Quero Reservar!
+          </button>
         </div>
       </div>
     `;
   }).join("");
+
+  gridEl.querySelectorAll(".cta").forEach(btn => {
+    btn.addEventListener("click", () => openModal(parseInt(btn.dataset.id)));
+  });
 }
+
+// ---- Modal logic ----
+const overlay = document.getElementById("overlay");
+const modalBrand = document.getElementById("modalBrand");
+const modalName = document.getElementById("modalName");
+const modalQtySub = document.getElementById("modalQtySub");
+const qtyValueEl = document.getElementById("qtyValue");
+const qtyNoteEl = document.getElementById("qtyNote");
+const modalTotalEl = document.getElementById("modalTotal");
+const modalWhatsapp = document.getElementById("modalWhatsapp");
+
+function openModal(id) {
+  currentProduct = PRODUCTS.find(p => p.id === id);
+  if (!currentProduct) return;
+  qty = 1;
+  modalBrand.textContent = currentProduct.brand || "";
+  modalName.textContent = currentProduct.name;
+
+  const isDecant = currentProduct.category === "decants";
+  const isEletronico = currentProduct.category === "eletronicos";
+  const hasLimit = !isDecant && !isEletronico;
+  const maxQty = hasLimit ? (currentProduct.stock ?? 3) : null;
+
+  modalQtySub.textContent = isDecant
+    ? "Cada unidade equivale a 5ml"
+    : hasLimit
+    ? `Unidades disponíveis: ${maxQty}`
+    : "Unidades disponíveis";
+
+  updateModal();
+  overlay.classList.add("open");
+}
+
+function updateModal() {
+  const isDecant = currentProduct.category === "decants";
+  const isEletronico = currentProduct.category === "eletronicos";
+  const hasLimit = !isDecant && !isEletronico;
+  const maxQty = hasLimit ? (currentProduct.stock ?? 3) : null;
+
+  qtyValueEl.textContent = qty;
+
+  const plusBtn = document.getElementById("qtyPlus");
+  const minusBtn = document.getElementById("qtyMinus");
+  minusBtn.disabled = qty <= 1;
+  plusBtn.disabled = hasLimit && qty >= maxQty;
+  plusBtn.style.opacity = plusBtn.disabled ? 0.4 : 1;
+  minusBtn.style.opacity = minusBtn.disabled ? 0.4 : 1;
+
+  let note = isDecant
+    ? `${qty} unidade${qty > 1 ? "s" : ""} × 5ml = ${qty * 5}ml`
+    : `${qty} unidade${qty > 1 ? "s" : ""}`;
+  if (hasLimit && qty >= maxQty) note += " — quantidade máxima em estoque";
+  qtyNoteEl.textContent = note;
+
+  const unitPrice = parsePrice(currentProduct.price);
+  const total = unitPrice * qty;
+  modalTotalEl.textContent = formatPrice(total);
+
+  const productLabel = isDecant
+    ? `${qty}x Decant 5ML - ${currentProduct.name} (${currentProduct.brand})`
+    : `${qty}x ${currentProduct.name} (${currentProduct.brand})`;
+  const msg = encodeURIComponent(`Olá! Quero reservar: ${productLabel} - Total: ${formatPrice(total)}`);
+  modalWhatsapp.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+}
+
+document.getElementById("qtyMinus").addEventListener("click", () => {
+  if (qty > 1) { qty--; updateModal(); }
+});
+document.getElementById("qtyPlus").addEventListener("click", () => {
+  const isDecant = currentProduct.category === "decants";
+  const isEletronico = currentProduct.category === "eletronicos";
+  const hasLimit = !isDecant && !isEletronico;
+  const maxQty = hasLimit ? (currentProduct.stock ?? 3) : null;
+  if (hasLimit && qty >= maxQty) return;
+  qty++; updateModal();
+});
+document.getElementById("modalClose").addEventListener("click", () => overlay.classList.remove("open"));
+overlay.addEventListener("click", (e) => { if (e.target === overlay) overlay.classList.remove("open"); });
 
 document.getElementById("searchInput").addEventListener("input", (e) => {
   query = e.target.value;
