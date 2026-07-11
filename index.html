@@ -326,7 +326,8 @@ const ICONS = {
   perfumes: '<path d="M12 2v4M8 4h8M9 8h6l1 12H8L9 8z"/>',
   decants: '<path d="M12 2c4 4 6 7 6 10a6 6 0 1 1-12 0c0-3 2-6 6-10z"/>',
   eletronicos: '<rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/>',
-  bebidas: '<path d="M8 2h8l-1 7a3 3 0 0 1-6 0L8 2z"/><path d="M12 13v9M8 22h8"/>'
+  bebidas: '<path d="M8 2h8l-1 7a3 3 0 0 1-6 0L8 2z"/><path d="M12 13v9M8 22h8"/>',
+  cosmeticos: '<rect x="7" y="10" width="10" height="11" rx="2"/><rect x="9" y="4" width="6" height="6" rx="1"/>'
 };
 
 const CATEGORIES = [
@@ -334,7 +335,8 @@ const CATEGORIES = [
   { id: "perfumes", label: "Perfumes" },
   { id: "decants", label: "Decants" },
   { id: "eletronicos", label: "Eletrônicos" },
-  { id: "bebidas", label: "Bebidas" }
+  { id: "bebidas", label: "Bebidas" },
+  { id: "cosmeticos", label: "Cosméticos" }
 ];
 
 const PRODUCTS = [
@@ -378,7 +380,24 @@ const PRODUCTS = [
   { id: 35, category: "bebidas", brand: "Johnnie Walker", name: "Red Label 1L", price: "R$ 149,90", image: "images/Johnnie-Walker-Red-Label-1L.png" },
   { id: 36, category: "bebidas", brand: "Johnnie Walker", name: "Gold Label 750Ml", price: "R$ 359,90", image: "images/Johnnie-Walker-Gold-Label-750Ml.png" },
   { id: 37, category: "bebidas", brand: "Jack Daniel´s", name: "honey 1L", price: "R$ 219,90", image: "images/Jack-Daniel-s-Honey-1L.png" },
-  { id: 38, category: "bebidas", brand: "Jack Daniel´s", name: "Black Old 1L", price: "R$ 209,90", image: "images/Jack-Daniel-s-Black-Old-1L.png" }
+  { id: 38, category: "bebidas", brand: "Jack Daniel´s", name: "Black Old 1L", price: "R$ 209,90", image: "images/Jack-Daniel-s-Black-Old-1L.png" },
+
+  { id: 39, category: "cosmeticos", brand: "CELIMAX", name: "Retinal Shot", price: "R$ 150,00", image: "images/celimax-retinal-shot.jpg" },
+  { id: 40, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Velvet Petals", price: "R$ 119,90", image: "images/vs-bodysplash-velvet-petals.jpg" },
+  { id: 41, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Coconut Passion", price: "R$ 119,90", image: "images/vs-bodysplash-coconut-passion.jpg" },
+  { id: 42, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Pure Seduction", price: "R$ 119,90", image: "images/vs-bodysplash-pure-seduction.jpg" },
+  { id: 43, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Lotion Coconut Passion", price: "R$ 119,90", image: "images/vs-bodylotion-coconut-passion.jpg" },
+  { id: 44, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Lotion Bare Vanilla", price: "R$ 159,90", image: "images/vs-bodylotion-bare-vanilla.jpg" },
+  { id: 45, category: "cosmeticos", brand: "Dissar", name: "Sérum Facial", price: "R$ 54,90", image: "images/dissar-serum-facial.jpg" },
+  { id: 46, category: "cosmeticos", brand: "Dr. Rashel", name: "Gold Black Pearl Eye Mask", price: "R$ 49,90", image: "images/dr-rashel-gold-black-pearl-eye-mask.jpg" },
+  { id: 47, category: "cosmeticos", brand: "K&C", name: "Toner Facial", price: "R$ 46,90", image: "images/kc-toner-facial.jpg" },
+  { id: 48, category: "cosmeticos", brand: "K&C", name: "Espuma Demaquilante", price: "R$ 45,90", image: "images/kc-espuma-demaquilante.jpg" },
+  { id: 49, category: "cosmeticos", brand: "K&C", name: "Sérum para Olhos", price: "R$ 29,90", image: "images/kc-serum-olho.jpg" },
+  { id: 50, category: "cosmeticos", brand: "K&C", name: "Protetor", price: "R$ 39,90", image: "images/kc-protetor.jpg" },
+  { id: 51, category: "cosmeticos", brand: "K&C", name: "Lenço Demaquilante", price: "R$ 28,90", image: "images/kc-lenco-demaquilante.jpg" },
+  { id: 52, category: "cosmeticos", brand: "Stella Dustin", name: "Creme para Mãos", price: "R$ 19,90", image: "images/stella-dustin-creme-mao.jpg" },
+  { id: 53, category: "cosmeticos", brand: "Stella Dustin", name: "Creme Renew", price: "R$ 65,90", image: "images/stella-dustin-creme-renew.jpg" },
+  { id: 54, category: "cosmeticos", brand: "Stella Dustin", name: "Creme Repair", price: "R$ 65,90", image: "images/stella-dustin-creme-repair.jpg" }
 ];
 
 let active = "todos";
@@ -444,6 +463,8 @@ function renderGrid() {
       ? `<div class="stock-label">Estoque disponível</div><div class="stock-pill"><strong>Conferir disponibilidade e cores</strong></div>`
       : isBebida
       ? `<div class="stock-label">Estoque disponível</div><div class="stock-pill"><strong>Sob pedido</strong></div>`
+      : (p.stock === 0)
+      ? `<div class="stock-label">Estoque disponível</div><div class="stock-pill" style="background:#F1E3E0; color:#A65C4E;"><strong>Esgotado</strong></div>`
       : `<div class="stock-label">Estoque disponível</div><div class="stock-pill">Disponível: <strong>${p.stock ?? 3}</strong></div>`;
     return `
       <div class="card">
@@ -497,6 +518,8 @@ function openModal(id) {
     ? "Cada unidade equivale a 5ml"
     : isBebida
     ? "Sob pedido"
+    : (hasLimit && currentProduct.stock === 0)
+    ? "Esgotado — aguardando reposição"
     : hasLimit
     ? `Unidades disponíveis: ${maxQty}`
     : "Unidades disponíveis";
