@@ -533,6 +533,8 @@ function renderGrid() {
     return matchCat && matchQuery;
   });
 
+  filtered.sort((a, b) => (a.stock === 0 ? 1 : 0) - (b.stock === 0 ? 1 : 0));
+
   if (filtered.length === 0) {
     gridEl.style.display = "none";
     emptyEl.style.display = "block";
