@@ -191,6 +191,15 @@
     border-top: 1px solid var(--line);
     font-size: 12px; color: #8A8377;
   }
+  footer p { margin: 0; }
+  .vip-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--whatsapp); color: #fff;
+    font-size: 13px; font-weight: 600; padding: 12px 22px; border-radius: 999px;
+    text-decoration: none; margin-bottom: 18px;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .vip-btn svg { width: 15px; height: 15px; }
   .empty { text-align: center; padding: 60px 0; font-size: 14px; color: #8A8377; }
 
   .home-tile {
@@ -291,12 +300,12 @@
 <header>
   <div class="eyebrow"><span class="dot"></span> TechGlow Imports <span class="dot"></span></div>
   <h1 class="font-display">Catálogo</h1>
-  <p>Perfumaria árabe e de nicho, decants e seleção de produtos importados sob encomenda!</p>
+  <p>Perfumaria árabe e de nicho, decants e seleção de produtos importados <strong>sob encomenda!</strong></p>
 </header>
 
 <div class="toolbar">
   <div class="toolbar-inner">
-    <div class="search">
+    <div class="search" id="searchBar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B6F3F" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
       <input id="searchInput" placeholder="Buscar produto ou marca..." />
     </div>
@@ -309,7 +318,13 @@
   <div class="empty" id="empty" style="display:none;">Nenhum produto encontrado para essa busca.</div>
 </main>
 
-<footer>TechGlow Imports · techglowimports.com.br · Atendimento via WhatsApp e Instagram</footer>
+<footer>
+  <a class="vip-btn" href="https://chat.whatsapp.com/LairaM4B8GT2D7UpigvoHv?mode=gi_t" target="_blank" rel="noopener noreferrer">
+    <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12c0 1.84.5 3.56 1.35 5.04L2 22l5.13-1.32C8.55 21.5 10.24 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.2 14.15c-.22.62-1.3 1.18-1.8 1.24-.46.06-1.04.08-1.68-.1a15 15 0 0 1-4.65-2.95 12.7 12.7 0 0 1-2.65-3.6c-.28-.5-.34-1.1-.1-1.6.24-.5.7-.95 1.05-1.05.2-.06.42-.06.6 0 .18.06.32.24.42.42l.7 1.6c.1.22.06.48-.08.66l-.3.36c-.14.16-.16.4-.04.58.5.78 1.2 1.5 2 2 .18.12.42.1.58-.04l.36-.3c.18-.14.44-.18.66-.08l1.6.7c.18.1.36.24.42.42.06.18.06.4 0 .6z"/></svg>
+    Entrar no Grupo VIP
+  </a>
+  <p>TechGlow Imports · techglowimports.com.br · Atendimento via WhatsApp e Instagram</p>
+</footer>
 
 <!-- Modal -->
 <div class="overlay" id="overlay">
@@ -366,7 +381,7 @@ const PRODUCTS = [
   { id: 1, category: "perfumes", brand: "Armaf", name: "Club de Nuit Maleka", price: "R$ 249,90", image: "images/armaf-club-de-nuit-maleka.jpg", stock: 1 },
   { id: 2, category: "perfumes", brand: "Armaf", name: "Club de Nuit Intense Man", price: "R$ 239,90", image: "images/armaf-club-de-nuit-intense-man.jpg", stock: 2 },
   { id: 3, category: "perfumes", brand: "Armaf", name: "Club de Nuit Urban", price: "R$ 259,90", image: "images/armaf-club-de-nuit-urban.jpg", stock: 1 },
-  { id: 4, category: "perfumes", brand: "French Avenue", name: "Vulcan Feu", price: "R$ 329,90", featured: true, image: "images/french-avenue-vulcan-feu.jpg", stock: 4 },
+  { id: 4, category: "perfumes", brand: "French Avenue", name: "Vulcan Feu", price: "R$ 329,90", featured: true, image: "images/french-avenue-vulcan-feu.jpg", stock: 5 },
   { id: 5, category: "perfumes", brand: "French Avenue", name: "Liquid Brun", price: "R$ 319,90", image: "images/french-avenue-liquid-brun.jpg", stock: 0 },
   { id: 6, category: "perfumes", brand: "French Avenue", name: "Spectre Ghost", price: "R$ 289,90", image: "images/french-avenue-spectre-ghost.jpg", stock: 1 },
   { id: 7, category: "perfumes", brand: "French Avenue", name: "Aether Extrait", price: "R$ 319,90", image: "images/french-avenue-aether-extrait.jpg", stock: 0 },
@@ -377,56 +392,50 @@ const PRODUCTS = [
   { id: 12, category: "perfumes", brand: "Bidaya", name: "Habibi Prince", price: "R$ 289,90", image: "images/bidaya-habibi-prince.jpg", stock: 0 },
   { id: 13, category: "perfumes", brand: "Bidaya", name: "Elliur", price: "R$ 289,90", image: "images/bidaya-elliur.jpg", stock: 0 },
 
-  { id: 14, category: "decants", brand: "Maison Alhambra", name: "Alpine Homme Sport", price: "R$ 29,90", image: "images/alpine-maison.png" },
-  { id: 15, category: "decants", brand: "Armaf", name: "Club de Nuit Maleka", price: "R$ 35,90", image: "images/armaf-club-de-nuit-maleka-decant.jpg" },
-  { id: 16, category: "decants", brand: "Armaf", name: "Club de Nuit Intense Man", price: "R$ 35,90", image: "images/armaf-club-de-nuit-intense-man-decant.jpg" },
-  { id: 17, category: "decants", brand: "Armaf", name: "Club de Nuit Urban", price: "R$ 35,90", image: "images/armaf-club-de-nuit-urban-decant.jpg" },
-  { id: 18, category: "decants", brand: "French Avenue", name: "Vulcan Feu", price: "R$ 39,90", image: "images/french-avenue-vulcan-feu-decant.jpg" },
-  { id: 19, category: "decants", brand: "French Avenue", name: "Liquid Brun", price: "R$ 39,90", image: "images/french-avenue-liquid-brun-decant.jpg" },
-  { id: 20, category: "decants", brand: "French Avenue", name: "Spectre Ghost", price: "R$ 39,90", image: "images/french-avenue-spectre-ghost-decant.jpg" },
-  { id: 21, category: "decants", brand: "French Avenue", name: "Aether Extrait", price: "R$ 45,90", featured: true, image: "images/french-avenue-aether-extrait-decant.jpg" },
-  { id: 22, category: "decants", brand: "Afnan", name: "Turathi Blue", price: "R$ 39,90", image: "images/afnan-turathi-blue-decant.jpg" },
+  { id: 14, category: "decants", brand: "Armaf", name: "Club de Nuit Maleka", price: "R$ 35,90", image: "images/armaf-club-de-nuit-maleka-decant.jpg" },
+  { id: 15, category: "decants", brand: "Armaf", name: "Club de Nuit Intense Man", price: "R$ 35,90", image: "images/armaf-club-de-nuit-intense-man-decant.jpg" },
+  { id: 16, category: "decants", brand: "Armaf", name: "Club de Nuit Urban", price: "R$ 35,90", image: "images/armaf-club-de-nuit-urban-decant.jpg" },
+  { id: 17, category: "decants", brand: "French Avenue", name: "Vulcan Feu", price: "R$ 39,90", image: "images/french-avenue-vulcan-feu-decant.jpg" },
+  { id: 18, category: "decants", brand: "French Avenue", name: "Liquid Brun", price: "R$ 39,90", image: "images/french-avenue-liquid-brun-decant.jpg" },
+  { id: 19, category: "decants", brand: "French Avenue", name: "Spectre Ghost", price: "R$ 39,90", image: "images/french-avenue-spectre-ghost-decant.jpg" },
+  { id: 20, category: "decants", brand: "French Avenue", name: "Aether Extrait", price: "R$ 45,90", featured: true, image: "images/french-avenue-aether-extrait-decant.jpg" },
+  { id: 21, category: "decants", brand: "Afnan", name: "Turathi Blue", price: "R$ 39,90", image: "images/afnan-turathi-blue-decant.jpg" },
 
-  { id: 23, category: "eletronicos", brand: "Apple", name: "iPhone 17 256GB", price: "R$ 5.699,00", image: "images/apple-iphone-17.jpg" },
-  { id: 24, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro 256GB", price: "R$ 6.799,00", image: "images/apple-iphone-17-pro.jpg" },
-  { id: 25, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro Max 256GB", price: "R$ 7.899,00", featured: true, image: "images/apple-iphone-17-pro-max.jpg" },
-  { id: 26, category: "eletronicos", brand: "Apple", name: "iPad 11 A16 128GB", price: "R$ 2.699,00", image: "images/apple-ipad-11.jpg" },
-  { id: 27, category: "eletronicos", brand: "Xiaomi", name: "Robot Vacuum S40c", price: "R$ 1.329,90", image: "images/xiaomis40c.png" },
-  { id: 28, category: "eletronicos", brand: "Xiaomi", name: "Robot Vacuum H50 220v", price: "R$ 2.799,00", image: "images/xiaomih50.png" },
-  { id: 29, category: "eletronicos", brand: "Amazon", name: "Fire Tv Stick", price: "R$ 309,90", image: "images/firestick.png" },
-  { id: 30, category: "eletronicos", brand: "Amazon", name: "Echo Dot Alexa 5a Ger.", price: "R$ 419,90", image: "images/alexa5.png" },
+  { id: 22, category: "eletronicos", brand: "Apple", name: "iPhone 17 256GB", price: "R$ 5.600,00", image: "images/apple-iphone-17.jpg" },
+  { id: 23, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro 256GB", price: "R$ 7.990,00", image: "images/apple-iphone-17-pro.jpg" },
+  { id: 24, category: "eletronicos", brand: "Apple", name: "iPhone 17 Pro Max 256GB", price: "R$ 8.990,00", featured: true, image: "images/apple-iphone-17-pro-max.jpg" },
+  { id: 25, category: "eletronicos", brand: "Apple", name: "iPad 11 A16 128GB", price: "R$ 2.600,00", image: "images/apple-ipad-11.jpg" },
 
-  { id: 31, category: "bebidas", brand: "Luigi Bosca", name: "Malbec Tinto", price: "R$ 149,90", image: "images/Luigi-Bosca-Malbec-tinto-750Ml.png" },
-  { id: 32, category: "bebidas", brand: "Catena Zapata", name: "D.V Catena Malbec/Malbec", price: "R$ 149,90", image: "images/Catena-Zapata-DV-Catena-MalbecMalbec-750Ml.png" },
-  { id: 33, category: "bebidas", brand: "Catena Zapata", name: "Caveira Malbec 750Ml", price: "R$ 369,90", image: "images/Catena-Zapata-Caveira-Malbec-750Ml.png" },
-  { id: 34, category: "bebidas", brand: "Catena Zapata", name: "D.V Catena Cabernet Malbec", price: "R$ 159,90", image: "images/catena-zapata-dv-catena.jpg" },
-  { id: 35, category: "bebidas", brand: "Catena Zapata", name: "Angelica Zapata Malbec", price: "R$ 159,90", image: "images/catena-zapata-angelica-zapata.jpg" },
-  { id: 36, category: "bebidas", brand: "Ernesto Catena", name: "Vinho Alma Negra", price: "R$ 185,90", image: "images/ernesto-catena-alma-negra.jpg" },
-  { id: 37, category: "bebidas", brand: "Whisky", name: "The Dalmore", price: "R$ 800,00", image: "images/whisky-the-dalmore.jpg" },
-  { id: 38, category: "bebidas", brand: "Whisky", name: "The Macallan", price: "R$ 900,00", image: "images/whisky-the-macallan.jpg" },
-  { id: 39, category: "bebidas", brand: "Whisky", name: "Grand Old Par 1L", price: "R$ 239,90", image: "images/Whisky-Grand-Old-Par-1L.png" },
-  { id: 40, category: "bebidas", brand: "Johnnie Walker", name: "Red Label 1L", price: "R$ 149,90", image: "images/Johnnie-Walker-Red-Label-1L.png" },
-  { id: 41, category: "bebidas", brand: "Johnnie Walker", name: "Gold Label 750Ml", price: "R$ 359,90", image: "images/Johnnie-Walker-Gold-Label-750Ml.png" },
-  { id: 42, category: "bebidas", brand: "Jack Daniel´s", name: "honey 1L", price: "R$ 219,90", image: "images/Jack-Daniel-s-Honey-1L.png" },
-  { id: 43, category: "bebidas", brand: "Jack Daniel´s", name: "Black Old 1L", price: "R$ 209,90", image: "images/Jack-Daniel-s-Black-Old-1L.png" },
+  { id: 26, category: "bebidas", brand: "Luigi Bosca", name: "Malbec Tinto", price: "R$ 149,90", image: "images/Luigi-Bosca-Malbec-tinto-750Ml.png" },
+  { id: 27, category: "bebidas", brand: "Catena Zapata", name: "D.V Catena Malbec/Malbec", price: "R$ 149,90", image: "images/Catena-Zapata-DV-Catena-MalbecMalbec-750Ml.png" },
+  { id: 28, category: "bebidas", brand: "Catena Zapata", name: "Caveira Malbec 750Ml", price: "R$ 369,90", image: "images/Catena-Zapata-Caveira-Malbec-750Ml.png" },
+  { id: 29, category: "bebidas", brand: "Catena Zapata", name: "D.V Catena Cabernet Malbec", price: "R$ 159,90", image: "images/catena-zapata-dv-catena.jpg" },
+  { id: 30, category: "bebidas", brand: "Catena Zapata", name: "Angelica Zapata Malbec", price: "R$ 159,90", image: "images/catena-zapata-angelica-zapata.jpg" },
+  { id: 31, category: "bebidas", brand: "Ernesto Catena", name: "Vinho Alma Negra", price: "R$ 185,90", image: "images/ernesto-catena-alma-negra.jpg" },
+  { id: 32, category: "bebidas", brand: "Whisky", name: "The Dalmore", price: "R$ 800,00", image: "images/whisky-the-dalmore.jpg" },
+  { id: 33, category: "bebidas", brand: "Whisky", name: "The Macallan", price: "R$ 900,00", image: "images/whisky-the-macallan.jpg" },
+  { id: 34, category: "bebidas", brand: "Whisky", name: "Grand Old Par 1L", price: "R$ 239,90", image: "images/Whisky-Grand-Old-Par-1L.png" },
+  { id: 35, category: "bebidas", brand: "Johnnie Walker", name: "Red Label 1L", price: "R$ 149,90", image: "images/Johnnie-Walker-Red-Label-1L.png" },
+  { id: 36, category: "bebidas", brand: "Johnnie Walker", name: "Gold Label 750Ml", price: "R$ 359,90", image: "images/Johnnie-Walker-Gold-Label-750Ml.png" },
+  { id: 37, category: "bebidas", brand: "Jack Daniel´s", name: "honey 1L", price: "R$ 219,90", image: "images/Jack-Daniel-s-Honey-1L.png" },
+  { id: 38, category: "bebidas", brand: "Jack Daniel´s", name: "Black Old 1L", price: "R$ 209,90", image: "images/Jack-Daniel-s-Black-Old-1L.png" },
 
-  { id: 44, category: "cosmeticos", brand: "CELIMAX", name: "Retinal Shot", price: "R$ 150,00", image: "images/celimax-retinal-shot.jpg", stock: 2 },
-  { id: 45, category: "cosmeticos", brand: "Numbuzin", name: "No.9 Nad+ Retinol Volumetox", price: "R$ 249,90", image: "images/retinol.png", stock: 2 },
-  { id: 46, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Velvet Petals", price: "R$ 119,90", image: "images/vs-bodysplash-velvet-petals.jpg", stock: 1 },
-  { id: 47, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Coconut Passion", price: "R$ 119,90", image: "images/vs-bodysplash-coconut-passion.jpg", stock: 1 },
-  { id: 48, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Pure Seduction", price: "R$ 119,90", image: "images/vs-bodysplash-pure-seduction.jpg", stock: 1 },
-  { id: 49, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Lotion Coconut Passion", price: "R$ 119,90", image: "images/vs-bodylotion-coconut-passion.jpg", stock: 1 },
-  { id: 50, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Lotion Bare Vanilla", price: "R$ 159,90", image: "images/vs-bodylotion-bare-vanilla.jpg", stock: 2 },
-  { id: 51, category: "cosmeticos", brand: "Dissar", name: "Sérum Facial", price: "R$ 54,90", image: "images/dissar-serum-facial.jpg", stock: 1 },
-  { id: 52, category: "cosmeticos", brand: "Dr. Rashel", name: "Gold Black Pearl Eye Mask", price: "R$ 49,90", image: "images/dr-rashel-gold-black-pearl-eye-mask.jpg", stock: 1 },
-  { id: 53, category: "cosmeticos", brand: "K&C", name: "Toner Facial", price: "R$ 46,90", image: "images/kc-toner-facial.jpg", stock: 1 },
-  { id: 54, category: "cosmeticos", brand: "K&C", name: "Espuma Demaquilante", price: "R$ 45,90", image: "images/kc-espuma-demaquilante.jpg", stock: 1 },
-  { id: 55, category: "cosmeticos", brand: "K&C", name: "Sérum para Olhos", price: "R$ 29,90", image: "images/kc-serum-olho.jpg", stock: 0 },
-  { id: 56, category: "cosmeticos", brand: "K&C", name: "Protetor", price: "R$ 39,90", image: "images/kc-protetor.jpg", stock: 2 },
-  { id: 57, category: "cosmeticos", brand: "K&C", name: "Lenço Demaquilante", price: "R$ 28,90", image: "images/kc-lenco-demaquilante.jpg", stock: 1 },
-  { id: 58, category: "cosmeticos", brand: "Stella Dustin", name: "Creme para Mãos", price: "R$ 19,90", image: "images/stella-dustin-creme-mao.jpg", stock: 15 },
-  { id: 59, category: "cosmeticos", brand: "Stella Dustin", name: "Creme Renew", price: "R$ 65,90", image: "images/stella-dustin-creme-renew.jpg", stock: 1 },
-  { id: 60, category: "cosmeticos", brand: "Stella Dustin", name: "Creme Repair", price: "R$ 65,90", image: "images/stella-dustin-creme-repair.jpg", stock: 1 }
+  { id: 39, category: "cosmeticos", brand: "CELIMAX", name: "Retinal Shot", price: "R$ 150,00", image: "images/celimax-retinal-shot.jpg" },
+  { id: 40, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Velvet Petals", price: "R$ 119,90", image: "images/vs-bodysplash-velvet-petals.jpg" },
+  { id: 41, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Coconut Passion", price: "R$ 119,90", image: "images/vs-bodysplash-coconut-passion.jpg" },
+  { id: 42, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Splash Pure Seduction", price: "R$ 119,90", image: "images/vs-bodysplash-pure-seduction.jpg" },
+  { id: 43, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Lotion Coconut Passion", price: "R$ 119,90", image: "images/vs-bodylotion-coconut-passion.jpg" },
+  { id: 44, category: "cosmeticos", brand: "Victoria´s Secret", name: "Body Lotion Bare Vanilla", price: "R$ 159,90", image: "images/vs-bodylotion-bare-vanilla.jpg" },
+  { id: 45, category: "cosmeticos", brand: "Dissar", name: "Sérum Facial", price: "R$ 54,90", image: "images/dissar-serum-facial.jpg" },
+  { id: 46, category: "cosmeticos", brand: "Dr. Rashel", name: "Gold Black Pearl Eye Mask", price: "R$ 49,90", image: "images/dr-rashel-gold-black-pearl-eye-mask.jpg" },
+  { id: 47, category: "cosmeticos", brand: "K&C", name: "Toner Facial", price: "R$ 46,90", image: "images/kc-toner-facial.jpg" },
+  { id: 48, category: "cosmeticos", brand: "K&C", name: "Espuma Demaquilante", price: "R$ 45,90", image: "images/kc-espuma-demaquilante.jpg" },
+  { id: 49, category: "cosmeticos", brand: "K&C", name: "Sérum para Olhos", price: "R$ 29,90", image: "images/kc-serum-olho.jpg" },
+  { id: 50, category: "cosmeticos", brand: "K&C", name: "Protetor", price: "R$ 39,90", image: "images/kc-protetor.jpg" },
+  { id: 51, category: "cosmeticos", brand: "K&C", name: "Lenço Demaquilante", price: "R$ 28,90", image: "images/kc-lenco-demaquilante.jpg" },
+  { id: 52, category: "cosmeticos", brand: "Stella Dustin", name: "Creme para Mãos", price: "R$ 19,90", image: "images/stella-dustin-creme-mao.jpg" },
+  { id: 53, category: "cosmeticos", brand: "Stella Dustin", name: "Creme Renew", price: "R$ 65,90", image: "images/stella-dustin-creme-renew.jpg" },
+  { id: 54, category: "cosmeticos", brand: "Stella Dustin", name: "Creme Repair", price: "R$ 65,90", image: "images/stella-dustin-creme-repair.jpg" }
 ];
 
 let active = "todos";
@@ -437,6 +446,7 @@ let qty = 1;
 const tabsEl = document.getElementById("tabs");
 const gridEl = document.getElementById("grid");
 const emptyEl = document.getElementById("empty");
+const searchBarEl = document.getElementById("searchBar");
 
 function icon(cat) {
   return `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[cat] || ICONS.todos}</svg>`;
@@ -475,6 +485,7 @@ const CATEGORY_COVERS = {
 };
 
 function renderHome() {
+  searchBarEl.style.display = "flex";
   tabsEl.style.display = "none";
   emptyEl.style.display = "none";
   gridEl.style.display = "flex";
@@ -504,6 +515,7 @@ function renderHome() {
 }
 
 function renderGrid() {
+  searchBarEl.style.display = (active === "todos") ? "flex" : "none";
   if (active === "todos" && query.trim() === "") {
     renderHome();
     return;
