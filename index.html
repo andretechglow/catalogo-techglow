@@ -650,7 +650,7 @@ function renderGrid() {
   tabsEl.style.display = "flex";
 
   gridEl.innerHTML = filtered.map(p => {
-    const stockPill = `<div class="stock-label">Estoque disponível</div><div class="stock-pill"><strong>Consultar disponibilidade/Encomendar</strong></div>`;
+    const stockPill = `<div class="stock-pill"><strong>Consultar disponibilidade</strong></div>`;
     return `
       <div class="card">
         <div class="thumb">
@@ -664,7 +664,7 @@ function renderGrid() {
           ${stockPill}
           <button class="cta" data-id="${p.id}">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Quero Reservar!
+            Quero Encomendar!
           </button>
         </div>
       </div>
@@ -715,7 +715,7 @@ function updateModal() {
   modalTotalEl.textContent = formatPrice(total);
 
   const productLabel = `${qty}x ${currentProduct.name} (${currentProduct.brand})`;
-  const msg = encodeURIComponent(`Olá! Quero reservar: ${productLabel} - Total: ${formatPrice(total)}`);
+  const msg = encodeURIComponent(`Olá! Quero encomendar: ${productLabel} - Total: ${formatPrice(total)}`);
   modalWhatsapp.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
 }
 
