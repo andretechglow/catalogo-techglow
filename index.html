@@ -99,7 +99,7 @@
   main { max-width: 960px; margin: 0 auto; padding: 8px 24px 64px; }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 320px));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 20px;
   }
 
@@ -139,7 +139,7 @@
   .thumb svg { width: 34px; height: 34px; stroke: var(--gold); }
   .thumb img {
     width: 100%; height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
   }
   .badge {
