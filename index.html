@@ -610,6 +610,7 @@ function goToCategory(cat, pushHistory = true) {
   active = cat;
   renderTabs();
   renderGrid();
+  window.scrollTo({ top: 0, behavior: "auto" });
   if (pushHistory) {
     history.pushState({ cat }, "", "");
   }
@@ -677,7 +678,6 @@ function renderHome() {
   gridEl.querySelectorAll(".home-tile").forEach(tile => {
     tile.addEventListener("click", () => {
       goToCategory(tile.dataset.cat);
-      window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
 }
@@ -842,6 +842,9 @@ document.getElementById("searchInput").addEventListener("input", (e) => {
   renderGrid();
 });
 
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
 history.replaceState({ cat: "todos" }, "", "");
 window.addEventListener("popstate", (e) => {
   const cat = (e.state && e.state.cat) ? e.state.cat : "todos";
