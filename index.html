@@ -551,6 +551,15 @@ let query = "";
 let currentProduct = null;
 let qty = 1;
 
+function goToCategory(cat, pushHistory = true) {
+  active = cat;
+  renderTabs();
+  renderGrid();
+  if (pushHistory) {
+    history.pushState({ cat }, "", "");
+  }
+}
+
 const tabsEl = document.getElementById("tabs");
 const gridEl = document.getElementById("grid");
 const emptyEl = document.getElementById("empty");
@@ -577,9 +586,7 @@ function renderTabs() {
   `).join("");
   tabsEl.querySelectorAll(".tab").forEach(btn => {
     btn.addEventListener("click", () => {
-      active = btn.dataset.cat;
-      renderTabs();
-      renderGrid();
+      goToCategory(btn.dataset.cat);
     });
   });
 }
@@ -615,11 +622,7 @@ function renderHome() {
 
   gridEl.querySelectorAll(".home-tile").forEach(tile => {
     tile.addEventListener("click", () => {
-      active = tile.dataset.cat;
-      gridEl.style.display = "grid";
-      gridEl.style.flexDirection = "";
-      renderTabs();
-      renderGrid();
+      goToCategory(tile.dataset.cat);
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
   });
@@ -731,6 +734,12 @@ overlay.addEventListener("click", (e) => { if (e.target === overlay) overlay.cla
 document.getElementById("searchInput").addEventListener("input", (e) => {
   query = e.target.value;
   renderGrid();
+});
+
+history.replaceState({ cat: "todos" }, "", "");
+window.addEventListener("popstate", (e) => {
+  const cat = (e.state && e.state.cat) ? e.state.cat : "todos";
+  goToCategory(cat, false);
 });
 
 renderTabs();
