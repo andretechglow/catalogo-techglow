@@ -192,29 +192,6 @@
     transition: background 0.25s, transform 0.25s;
   }
   .dot.active { background: var(--gold-light); transform: scale(1.3); }
-  .notes-slide {
-    background: linear-gradient(160deg, var(--ink) 0%, #2E2820 100%);
-    padding: 12px;
-    display: flex; flex-direction: column; gap: 8px;
-    overflow-y: auto;
-  }
-  .notes-label {
-    font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--gold); margin: 0 0 2px;
-  }
-  .accord-row { display: flex; flex-wrap: wrap; gap: 4px; }
-  .accord-pill {
-    font-size: 8px; padding: 2px 7px; border-radius: 999px;
-    background: rgba(184,151,90,0.16); color: var(--gold-light);
-    border: 1px solid rgba(184,151,90,0.35);
-  }
-  .notes-list {
-    font-size: 9.5px; color: var(--gold-light); line-height: 1.45;
-    opacity: 0.9; margin: 0;
-  }
-  .stat-row { display: flex; gap: 10px; margin-top: 1px; }
-  .stat { font-size: 8.5px; color: var(--gold-light); opacity: 0.85; }
-  .stat b { color: var(--gold); font-weight: 600; }
   .thumb img {
     width: 100%; height: 100%;
     object-fit: cover;
@@ -545,35 +522,35 @@ const PRODUCTS = [
 
   // ---- PERFUMES DE NICHO/DESIGNER (ordem alfabética de marca) ----
   // Creed
-  { id: 65, category: "perfumes-nicho", brand: "Creed", name: "Aventus", price: "R$ 2.699,00", image: "images/creed-aventus.jpg", notes: { accords: ["Frutado","Doce","Amadeirado","Couro","Cítrico"], notes: ["Abacaxi","Vidoeiro","Bergamota","Almíscar","Groselha Preta","Musgo de Carvalho"], longevity: "7h", sillage: "Forte" } },
-  { id: 66, category: "perfumes-nicho", brand: "Creed", name: "Absolu Aventus", price: "R$ 3.299,00", image: "images/creed-absolu-aventus.jpg", notes: { accords: ["Frutado","Cítrico","Aromático","Especiado Quente","Amadeirado"], notes: ["Abacaxi","Groselha Preta","Toranja","Vetiver","Patchouli","Cardamomo"], longevity: "7h", sillage: "Forte" } },
+  { id: 65, category: "perfumes-nicho", brand: "Creed", name: "Aventus", price: "R$ 2.699,00", image: "images/creed-aventus.jpg" },
+  { id: 66, category: "perfumes-nicho", brand: "Creed", name: "Absolu Aventus", price: "R$ 3.299,00", image: "images/creed-absolu-aventus.jpg" },
 
   // Nishane
-  { id: 67, category: "perfumes-nicho", brand: "Nishane", name: "Hacivat", price: "R$ 1.699,00", image: "images/nishane-hacivat.jpg", notes: { accords: ["Amadeirado","Cítrico","Musgo","Terroso","Frutado"], notes: ["Musgo de Carvalho","Abacaxi","Toranja","Bergamota","Notas Amadeiradas","Cedro"], longevity: "8h", sillage: "Forte" } },
-  { id: 68, category: "perfumes-nicho", brand: "Nishane", name: "Ani", price: "R$ 1.899,00", image: "images/nishane-ani.jpg", notes: { accords: ["Baunilha","Especiado Quente","Amadeirado","Fresco Especiado","Cítrico"], notes: ["Fava de Baunilha","Flor de Gengibre","Bergamota","Cardamomo","Benjoim","Sândalo"], longevity: "8h", sillage: "Forte" } },
+  { id: 67, category: "perfumes-nicho", brand: "Nishane", name: "Hacivat", price: "R$ 1.699,00", image: "images/nishane-hacivat.jpg" },
+  { id: 68, category: "perfumes-nicho", brand: "Nishane", name: "Ani", price: "R$ 1.899,00", image: "images/nishane-ani.jpg" },
 
   // Parfums de Marly
-  { id: 69, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Delina", price: "R$ 2.499,00", image: "images/pdm-delina.jpg", notes: { accords: ["Rosa","Floral","Frutado","Fresco","Almiscarado"], notes: ["Rosa","Lichia","Ruibarbo","Peônia","Almíscar","Petalia"], longevity: "7h", sillage: "Forte" } },
-  { id: 70, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Delina Exclusif", price: "R$ 2.699,00", image: "images/pdm-delina-exclusif.jpg", notes: { accords: ["Rosa","Frutado","Baunilha","Âmbar","Tropical"], notes: ["Rosa","Lichia","Fava de Baunilha","Pera","Âmbar","Agarwood (Oud)"], longevity: "8h", sillage: "Forte" } },
-  { id: 71, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Layton", price: "R$ 2.999,00", image: "images/pdm-layton.jpg", notes: { accords: ["Especiado Quente","Fresco Especiado","Amadeirado","Baunilha","Aromático"], notes: ["Fava de Baunilha","Maçã","Cardamomo","Lavanda","Sândalo","Pimenta"], longevity: "8h", sillage: "Forte" } },
-  { id: 72, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Althaïr", price: "R$ 2.899,00", image: "images/pdm-althair.jpg", notes: { accords: ["Doce","Baunilha","Especiado Quente","Canela","Aromático"], notes: ["Fava de Baunilha","Pralinê","Canela","Flor de Laranjeira","Cardamomo","Almíscar"], longevity: "8h", sillage: "Forte" } },
-  { id: 73, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Greenley", price: "R$ 1.899,00", image: "images/pdm-greenley.jpg", notes: { accords: ["Amadeirado","Cítrico","Frutado","Verde","Atalcado"], notes: ["Maçã","Bergamota","Musgo de Carvalho","Folha de Limão","Cedro","Almíscar"], longevity: "7h", sillage: "Forte" } },
+  { id: 69, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Delina", price: "R$ 2.499,00", image: "images/pdm-delina.jpg" },
+  { id: 70, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Delina Exclusif", price: "R$ 2.699,00", image: "images/pdm-delina-exclusif.jpg" },
+  { id: 71, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Layton", price: "R$ 2.999,00", image: "images/pdm-layton.jpg" },
+  { id: 72, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Althaïr", price: "R$ 2.899,00", image: "images/pdm-althair.jpg" },
+  { id: 73, category: "perfumes-nicho", brand: "Parfums de Marly", name: "Greenley", price: "R$ 1.899,00", image: "images/pdm-greenley.jpg" },
 
   // Sospiro
-  { id: 74, category: "perfumes-nicho", brand: "Sospiro", name: "Vibrato", price: "R$ 1.799,00", image: "images/sospiro-vibrato.jpg", notes: { accords: ["Cítrico","Fresco Especiado","Atalcado","Verde","Amadeirado"], notes: ["Toranja","Flor de Gengibre","Bergamota","Almíscar","Notas Verdes","Notas Atalcadas"], longevity: "8h", sillage: "Forte" } },
-  { id: 75, category: "perfumes-nicho", brand: "Sospiro", name: "Accento Viola", price: "R$ 1.999,00", image: "images/sospiro-accento-viola.jpg", notes: { accords: ["Almiscarado","Atalcado","Floral","Terroso","Doce"], notes: ["Jacinto","Almíscar","Íris","Abacaxi","Jasmim","Pimenta Rosa"], longevity: "8h", sillage: "Forte" } },
+  { id: 74, category: "perfumes-nicho", brand: "Sospiro", name: "Vibrato", price: "R$ 1.799,00", image: "images/sospiro-vibrato.jpg" },
+  { id: 75, category: "perfumes-nicho", brand: "Sospiro", name: "Accento Viola", price: "R$ 1.999,00", image: "images/sospiro-accento-viola.jpg" },
 
   // Tom Ford
-  { id: 76, category: "perfumes-nicho", brand: "Tom Ford", name: "Oud Wood", price: "R$ 2.199,00", image: "images/tomford-oud-wood.jpg", notes: { accords: ["Amadeirado","Oud","Especiado Quente","Aromático","Baunilha"], notes: ["Agarwood (Oud)","Pau-Rosa","Cardamomo","Sândalo","Pimenta","Fava de Baunilha"], longevity: "6h", sillage: "Forte" } },
-  { id: 77, category: "perfumes-nicho", brand: "Tom Ford", name: "Black Orchid", price: "R$ 1.799,00", image: "images/tomford-black-orchid.jpg", notes: { accords: ["Especiado Quente","Terroso","Amadeirado","Doce","Âmbar"], notes: ["Chocolate Amargo","Trufa","Patchouli","Orquídea","Especiarias","Fava de Baunilha"], longevity: "8h", sillage: "Forte" } },
-  { id: 78, category: "perfumes-nicho", brand: "Tom Ford", name: "Tobacco Vanille", price: "R$ 2.299,00", image: "images/tomford-tobacco-vanille.jpg", notes: { accords: ["Baunilha","Doce","Tabaco","Especiado Quente","Frutado"], notes: ["Flor de Tabaco","Fava de Baunilha","Especiarias","Frutas Secas","Semente de Cacau","Fava Tonka"], longevity: "8h", sillage: "Forte" } },
+  { id: 76, category: "perfumes-nicho", brand: "Tom Ford", name: "Oud Wood", price: "R$ 2.199,00", image: "images/tomford-oud-wood.jpg" },
+  { id: 77, category: "perfumes-nicho", brand: "Tom Ford", name: "Black Orchid", price: "R$ 1.799,00", image: "images/tomford-black-orchid.jpg" },
+  { id: 78, category: "perfumes-nicho", brand: "Tom Ford", name: "Tobacco Vanille", price: "R$ 2.299,00", image: "images/tomford-tobacco-vanille.jpg" },
 
   // Xerjoff
-  { id: 79, category: "perfumes-nicho", brand: "Xerjoff", name: "Torino 21", price: "R$ 2.499,00", image: "images/xerjoff-torino-21.jpg", notes: { accords: ["Aromático","Fresco Especiado","Verde","Cítrico","Almiscarado"], notes: ["Hortelã","Limão Verdadeiro","Manjericão","Almíscar","Groselha Preta","Lavanda"], longevity: "7h", sillage: "Forte" } },
-  { id: 80, category: "perfumes-nicho", brand: "Xerjoff", name: "Erba Gold", price: "R$ 2.099,00", image: "images/xerjoff-erba-gold.jpg", notes: { accords: ["Cítrico","Frutado","Fresco","Doce","Aquático"], notes: ["Melão","Laranja","Pera","Almíscar","Fava de Baunilha","Maçã"], longevity: "8h", sillage: "Forte" } },
-  { id: 81, category: "perfumes-nicho", brand: "Xerjoff", name: "Naxos", price: "R$ 2.199,00", image: "images/xerjoff-naxos.jpg", notes: { accords: ["Doce","Mel","Baunilha","Tabaco","Lavanda"], notes: ["Mel","Flor de Tabaco","Lavanda","Fava de Baunilha","Fava Tonka","Canela"], longevity: "8h", sillage: "Forte" } },
-  { id: 82, category: "perfumes-nicho", brand: "Xerjoff", name: "Erba Pura", price: "R$ 2.099,00", image: "images/xerjoff-erba-pura.jpg", notes: { accords: ["Cítrico","Frutado","Doce","Almiscarado","Atalcado"], notes: ["Notas Frutadas","Almíscar","Fava de Baunilha","Laranja","Âmbar","Bergamota"], longevity: "9h", sillage: "Enorme" } },
-  { id: 83, category: "perfumes-nicho", brand: "Xerjoff", name: "Renaissance", price: "R$ 2.699,00", image: "images/xerjoff-renaissance.jpg", notes: { accords: ["Cítrico","Verde","Aromático","Fresco Especiado","Amadeirado"], notes: ["Limão Verdadeiro","Hortelã","Tangerina","Bergamota","Folha de Limão","Almíscar"], longevity: "7h", sillage: "Forte" } },
+  { id: 79, category: "perfumes-nicho", brand: "Xerjoff", name: "Torino 21", price: "R$ 2.499,00", image: "images/xerjoff-torino-21.jpg" },
+  { id: 80, category: "perfumes-nicho", brand: "Xerjoff", name: "Erba Gold", price: "R$ 2.099,00", image: "images/xerjoff-erba-gold.jpg" },
+  { id: 81, category: "perfumes-nicho", brand: "Xerjoff", name: "Naxos", price: "R$ 2.199,00", image: "images/xerjoff-naxos.jpg" },
+  { id: 82, category: "perfumes-nicho", brand: "Xerjoff", name: "Erba Pura", price: "R$ 2.099,00", image: "images/xerjoff-erba-pura.jpg" },
+  { id: 83, category: "perfumes-nicho", brand: "Xerjoff", name: "Renaissance", price: "R$ 2.699,00", image: "images/xerjoff-renaissance.jpg" },
 
   // ---- ELETRÔNICOS ----
   { id: 84, category: "eletronicos", brand: "Apple", name: "iPhone 17 256GB", price: "R$ 5.699,00", image: "images/apple-iphone-17.jpg" },
@@ -657,26 +634,6 @@ function renderTabs() {
   });
 }
 
-function renderNotesSlide(n) {
-  const accordsHtml = n.accords.map(a => `<span class="accord-pill">${a}</span>`).join("");
-  return `
-    <div class="thumb-slide notes-slide">
-      <div>
-        <p class="notes-label">Principais acordes</p>
-        <div class="accord-row">${accordsHtml}</div>
-      </div>
-      <div>
-        <p class="notes-label">Notas</p>
-        <p class="notes-list">${n.notes.join(" · ")}</p>
-      </div>
-      <div class="stat-row">
-        <span class="stat">Longevidade: <b>${n.longevity}</b></span>
-        <span class="stat">Rastro: <b>${n.sillage}</b></span>
-      </div>
-    </div>
-  `;
-}
-
 function icon(cat) {
   return `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${ICONS[cat] || ICONS.todos}</svg>`;
 }
@@ -750,7 +707,7 @@ function renderGrid() {
     const stockPill = `<div class="stock-pill"><strong>Disponível para encomenda</strong></div>`;
     const secondSlide = p.image2
       ? `<div class="thumb-slide"><img src="${p.image2}" alt="${p.name}" loading="lazy" decoding="async" /></div>`
-      : (p.notes ? renderNotesSlide(p.notes) : null);
+      : null;
     const has2 = !!(p.image && secondSlide);
     let thumbInner;
     if (has2) {
