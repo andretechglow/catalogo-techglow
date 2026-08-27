@@ -147,9 +147,9 @@
     .price-row { font-size: 17px; }
     .brand { font-size: 9px; }
     .stock-label { font-size: 9px; }
-    .stock-pill { font-size: 10px; padding: 5px 9px; margin-bottom: 12px; }
-    .cta { font-size: 11px; padding: 9px 8px; }
-    .cta svg { width: 12px; height: 12px; }
+    .stock-pill { font-size: 9px; padding: 5px 8px; margin-bottom: 12px; white-space: nowrap; }
+    .cta { font-size: 10.5px; padding: 9px 6px; white-space: normal; line-height: 1.2; text-align: center; }
+    .cta svg { width: 12px; height: 12px; flex-shrink: 0; }
   }
   .card {
     border: 1px solid var(--line);
@@ -439,7 +439,7 @@ const CATEGORIES = [
 const PRODUCTS = [
   // ---- PERFUMES ÁRABES (ordem alfabética de marca) ----
   // Afnan
-  { id: 1, category: "perfumes", brand: "Afnan", name: "Turathi Blue", price: "R$ 279,90", image: "images/afnan-turathi-blue.jpg" },
+  { id: 1, category: "perfumes", brand: "Afnan", name: "Turathi Blue", price: "R$ 279,90", image: "images/afnan-turathi-blue.jpg", image2: "images/afnan-turathi-blue-2.jpg" },
   { id: 2, category: "perfumes", brand: "Afnan", name: "9PM", price: "R$ 239,90", image: "images/afnan-9pm.jpg" },
   { id: 3, category: "perfumes", brand: "Afnan", name: "Turathi Electric", price: "R$ 279,90", image: "images/afnan-turathi-electric.jpg" },
   { id: 4, category: "perfumes", brand: "Afnan", name: "Supremacy Gold", price: "R$ 459,90", image: "images/afnan-supremacy-gold.jpg" },
