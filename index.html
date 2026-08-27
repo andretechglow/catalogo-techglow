@@ -131,26 +131,6 @@
     gap: 20px;
   }
 
-  @media (max-width: 640px) {
-    header { padding: 36px 16px 28px; }
-    h1 { font-size: 40px; }
-    main { padding: 8px 16px 48px; }
-    .toolbar { padding: 16px 16px 0; }
-    #searchBar { display: flex; }
-    #tabs { display: none; }
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-    .card-body { padding: 12px; }
-    .name { font-size: 16px; margin-bottom: 8px; }
-    .price-row { font-size: 17px; }
-    .brand { font-size: 9px; }
-    .stock-label { font-size: 9px; }
-    .stock-pill { width: 100%; box-sizing: border-box; justify-content: center; font-size: 9px; padding: 5px 8px; margin-bottom: 12px; }
-    .cta { font-size: 10px; padding: 9px 6px; gap: 4px; white-space: normal; line-height: 1.15; text-align: center; }
-    .cta svg { width: 11px; height: 11px; flex-shrink: 0; }
-  }
   .card {
     border: 1px solid var(--line);
     background: var(--card);
@@ -162,23 +142,28 @@
     width: 100%;
     aspect-ratio: 1 / 1;
     background: linear-gradient(135deg, var(--ink) 0%, #2E2820 100%);
-    display: flex; align-items: center; justify-content: center;
     position: relative;
     overflow: hidden;
   }
-  .thumb svg { width: 34px; height: 34px; stroke: var(--gold); }
+  .thumb > svg {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 34px; height: 34px; stroke: var(--gold);
+  }
   .thumb-track {
+    position: absolute; top: 0; left: 0;
     display: flex;
     width: 100%;
     height: 100%;
     transition: transform 0.32s cubic-bezier(.4,0,.2,1);
     touch-action: pan-y;
   }
-  .thumb-track.has-2 { width: 200%; cursor: grab; flex-shrink: 0; }
+  .thumb-track.has-2 { width: 200%; cursor: grab; }
   .thumb-track.has-2.dragging { transition: none; cursor: grabbing; }
   .thumb-slide {
     width: 100%; height: 100%;
     flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
   }
   .thumb-track.has-2 .thumb-slide { width: 50%; }
   .dots {
@@ -352,6 +337,27 @@
     font-family: 'DM Sans', sans-serif;
   }
   .whatsapp-btn svg { width: 16px; height: 16px; fill: #fff; }
+
+  @media (max-width: 640px) {
+    header { padding: 36px 16px 28px; }
+    h1 { font-size: 40px; }
+    main { padding: 8px 16px 48px; }
+    .toolbar { padding: 16px 16px 0; }
+    #searchBar { display: flex; }
+    #tabs { display: none; }
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .card-body { padding: 12px; }
+    .name { font-size: 16px; margin-bottom: 8px; }
+    .price-row { font-size: 17px; }
+    .brand { font-size: 9px; }
+    .stock-label { font-size: 9px; }
+    .stock-pill { width: 100%; box-sizing: border-box; justify-content: center; font-size: 9px; padding: 5px 8px; margin-bottom: 12px; }
+    .cta { font-size: 10px; padding: 9px 6px; gap: 4px; white-space: normal; line-height: 1.15; text-align: center; }
+    .cta svg { width: 11px; height: 11px; flex-shrink: 0; }
+  }
 </style>
 </head>
 <body>
